@@ -15,7 +15,8 @@ def viewtext():
     #Open file and read it
 
     readText=open('Files/Memories.txt')
-
+    
+    print('Notepad Opening: \n')
     print(readText.read())
     readText.close()
     return
@@ -26,6 +27,35 @@ def takeText(textValue):
     note=input('Enter your text: ')
 
     return note
+
+#Clear notepads
+def clearnotes():
+
+    print('Notes cleared successfully! \n')
+
+    addText=open('Files/Memories.txt','w')
+
+    addText.write('\"Welcome to Python notepad\" \n')
+
+    addText.close()
+    return
+
+#Add time on the note
+
+import time
+
+def localtime():
+    named_tuple = time.localtime() # get struct_time
+    time_string = time.strftime("Last edited %m/%d/%Y, %H:%M:%S", named_tuple)
+
+    addText=open('Files/Memories.txt','a')
+
+    addText.write(time_string)
+    addText.write('\n')
+
+    addText.close()
+
+    return
 
 #add separation
 def addsep():
@@ -42,7 +72,7 @@ def addsep():
 
 def startup():
 
-    print('NotePad\n')
+    print('\"NotePad\"\n')
 
     print('Write the value')
 
@@ -52,9 +82,14 @@ def startup():
 
     print('q for quite the program')
 
+    print('c for clear notes')
+
+
+
+
 def shortmsg():
     print('Thanks for using Notepad')
-    print('Choose Operation: w r q')
+    print('Choose Operation: w r q c \n')
 
 #take options
 
@@ -87,6 +122,9 @@ while True:
         text='0'
         text=takeText(text)
         newtext(text)
+        addsep()
+        localtime()
+        addsep()
     
         print('\n')
         shortmsg()
@@ -103,4 +141,9 @@ while True:
 
         quitapp()
         break
+    
+    elif option == 'c' :
 
+        clearnotes()
+        shortmsg()
+        continue
